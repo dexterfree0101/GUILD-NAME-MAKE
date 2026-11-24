@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050914">
+<title>SACHIYA GUILD | Name Generator</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #050914;
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+body:before {
+  content: "";
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: #006aff;
+  filter: blur(160px);
+  opacity: .18;
+  top: -150px;
+  left: -150px;
+  pointer-events: none;
+}
+
+body:after {
+  content: "";
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  background: #702bff;
+  filter: blur(150px);
+  opacity: .15;
+  bottom: -150px;
+  right: -100px;
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 450px;
+  background: linear-gradient(145deg,#111c32,#080d19);
+  border: 1px solid #263b60;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: 0 0 45px #006aff18;
+}
+
+/* HEADER */
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-family: Orbitron, sans-serif;
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg,#fff,#62aaff,#a18bff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 25px #167bff35;
+}
+
+.header p {
+  color: #8295b8;
+  letter-spacing: 3px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 17px;
+  color: #65e9b0;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4dffad;
+  box-shadow: 0 0 10px #4dffad;
+}
+
+/* INPUT */
+
+.section-title {
+  font-size: 13px;
+  color: #9eb2d8;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 17px;
+  background: #080f1e;
+  border: 1px solid #2c4165;
+  border-radius: 13px;
+  color: white;
+  font-size: 17px;
+  font-family: Rajdhani;
+  outline: none;
+  transition: .3s;
+}
+
+input:focus {
+  border-color: #328cff;
+  box-shadow: 0 0 18px #167bff25;
+}
+
+/* PREVIEW */
+
+.preview {
+  margin-top: 24px;
+  padding: 22px 12px;
+  border: 1px solid #294b78;
+  border-radius: 16px;
+  background: linear-gradient(130deg,#102444,#11142b);
+  text-align: center;
+}
+
+.preview-label {
+  font-family: Orbitron;
+  font-size: 10px;
+  color: #6faeff;
+  letter-spacing: 3px;
+  margin-bottom: 17px;
+}
+
+#output {
+  font-size: 23px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+  color: #fff;
+  text-shadow: 0 0 15px #4c9bff70;
+}
+
+/* BUTTONS */
+
+button {
+  cursor: pointer;
+  transition: .2s;
+}
+
+.copy {
+  margin-top: 20px;
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: 12px;
+  color: white;
+  background: linear-gradient(90deg,#087bff,#703aff);
+  font-family: Orbitron;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 22px #146fff35;
+}
+
+.copy:active {
+  transform: scale(.97);
+}
+
+.reset {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #283b5c;
+  border-radius: 12px;
+  color: #a9bbd9;
+  background: #111c30;
+  font-family: Rajdhani;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.reset:active {
+  background: #1b2b48;
+}
+
+/* SAMPLES */
+
+.examples {
+  margin-top: 25px;
+}
+
+.examples h3 {
+  color: #91a8d0;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.example {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0b1425;
+  border: 1px solid #1d304d;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.example span {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.example button {
+  background: #1c3a64;
+  color: #83bdff;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+/* FOOTER */
+
+.footer {
+  margin-top: 25px;
+  padding-top: 18px;
+  border-top: 1px solid #26344c;
+  text-align: center;
+  color: #657895;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.footer strong {
+  display: block;
+  color: #7bb5ff;
+  font-family: Orbitron;
+  font-size: 11px;
+  margin-bottom: 7px;
+}
+
+/* MOBILE */
+
+@media(max-width:380px) {
+  .container {
+    padding: 19px;
+  }
+
+  .header h1 {
+    font-size: 21px;
+  }
+
+  #output {
+    font-size: 19px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>SACHIYA GUILD</h1>
+    <p>FREE FIRE • OFFICIAL NAME STYLE</p>
+
+    <div class="status">
+      <span class="dot"></span>
+      NAME GENERATOR ONLINE
+    </div>
+  </div>
+
+  <!-- MEMBER INPUT -->
+  <div class="section-title">MEMBER NAME</div>
+
+  <input
+    type="text"
+    id="name"
+    placeholder="Enter your name..."
+    maxlength="20"
+    autocomplete="off"
+  >
+
+  <!-- LIVE PREVIEW -->
+  <div class="preview">
+    <div class="preview-label">✦ LIVE PREVIEW ✦</div>
+    <div id="output">ᴼᴹᴳ| ＳＡＣＨＩＹＡ</div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <button class="copy" onclick="copyName()">
+    COPY GUILD NAME ↗
+  </button>
+
+  <button class="reset" onclick="resetName()">
+    ↻ RESET NAME
+  </button>
+
+  <!-- SAMPLE MEMBERS -->
+  <div class="examples">
+    <h3>✦ SAMPLE MEMBERS</h3>
+
+    <div class="example">
+      <span>ᴼᴹᴳ| ＳＡＣＨＩＹＡ</span>
+      <button onclick="copyText('ᴼᴹᴳ| ＳＡＣＨＩＹＡ')">COPY</button>
+    </div>
+
+    <div class="example">
+      <span>ᴼᴹᴳ| ＤＥＸＴＥＲ</span>
+      <button onclick="copyText('ᴼᴹᴳ| ＤＥＸＴＥＲ')">COPY</button>
+    </div>
+
+    <div class="example">
+      <span>ᴼᴹᴳ| ＭＡＨＩ</span>
+      <button onclick="copyText('ᴼᴹᴳ| ＭＡＨＩ')">COPY</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <strong>SACHIYA GUILD</strong>
+    POWERED BY FREE FIRE COMMUNITY
+  </div>
+
+</div>
+
+<script>
+const input = document.getElementById("name");
+const output = document.getElementById("output");
+
+function convert(text) {
+  return Array.from(text.toUpperCase()).map(c => {
+    const n = c.codePointAt(0);
+
+    if (n === 32) return "\u3000";
+
+    if (n >= 33 && n <= 126) {
+      return String.fromCodePoint(n + 0xFEE0);
+    }
+
+    return c;
+  }).join("");
+}
+
+function update() {
+  const name = input.value.trim();
+
+  output.textContent = name
+    ? "ᴼᴹᴳ| " + convert(name)
+    : "ᴼᴹᴳ| ＳＡＣＨＩＹＡ";
+}
+
+input.addEventListener("input", update);
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch(e) {
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+
+    const success = document.execCommand("copy");
+    area.remove();
+    return success;
+  }
+}
+
+async function copyName() {
+  const name = input.value.trim();
+
+  if (!name) {
+    input.focus();
+    return;
+  }
+
+  const btn = document.querySelector(".copy");
+  const success = await copyText("ᴼᴹᴳ| " + convert(name));
+
+  btn.textContent = success
+    ? "✓ COPIED SUCCESSFULLY"
+    : "COPY FAILED";
+
+  setTimeout(() => {
+    btn.textContent = "COPY GUILD NAME ↗";
+  }, 2000);
+}
+
+function resetName() {
+  input.value = "";
+  update();
+  input.focus();
+}
+</script>
+
+</body>
+</html>
